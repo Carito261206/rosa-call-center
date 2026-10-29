@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evaluación Ergonómica ROSA</title>
+<style>
+:root{--bg:#EEF2F7;--card:#fff;--tx:#1d2733;--mu:#5A5A5A;--pr:#0057B8;--ok:#2E7D32;--wa:#FFC107;--or:#F57C00;--ba:#D32F2F;--vh:#8E0000;--bd:#d5dce6;--neu:#c3cad4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1620;--card:#18222f;--tx:#e8eef6;--mu:#a9b6c6;--pr:#4C9AFF;--bd:#2c3a4c;--neu:#3a4859}}
+:root[data-theme="dark"]{--bg:#0f1620;--card:#18222f;--tx:#e8eef6;--mu:#a9b6c6;--pr:#4C9AFF;--bd:#2c3a4c;--neu:#3a4859}
+:root[data-hc]{--bg:#000;--card:#000;--tx:#fff;--mu:#fff;--pr:#5cb3ff;--bd:#fff;--neu:#777;--ok:#00e676;--wa:#ffea00;--or:#ff9100;--ba:#ff5252;--vh:#ff1744}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5}
+header.top{background:var(--pr);color:#fff;padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between}
+:root[data-hc] header.top{background:#000;border-bottom:2px solid #fff}
+.brand{font-weight:700;font-size:1.05rem}
+.tools{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+.tools button{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:6px;padding:.3rem .6rem;min-height:36px;cursor:pointer;font-size:.8rem}
+.tools button[aria-pressed=true]{background:#fff;color:#0057B8;font-weight:700}
+main{max-width:980px;margin:0 auto;padding:1rem}
+.prog{height:10px;background:var(--bd);border-radius:6px;overflow:hidden;margin:.3rem 0 1rem}
+.prog i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1.2rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+h1{margin:.2rem 0;color:var(--pr);font-size:1.7rem}h2{margin:.2rem 0 .6rem;color:var(--pr)}h3{margin:.2rem 0 .5rem}
+.sub{color:var(--mu)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem}
+label.f{display:block;font-weight:600;font-size:.9rem}
+input[type=text],select{width:100%;padding:.6rem;border:2px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit;min-height:44px;margin-top:.2rem}
+fieldset{border:1px solid var(--bd);border-radius:10px;margin:0 0 .9rem;padding:.7rem .9rem}
+fieldset.err{border-color:var(--ba);border-width:2px}
+fieldset:disabled{opacity:.5}
+legend{font-weight:700;padding:0 .4rem}
+.opts{display:flex;flex-wrap:wrap;gap:.5rem}
+label.o{position:relative}label.o input{position:absolute;opacity:0;inset:0}
+label.o span{display:block;padding:.55rem .95rem;border:2px solid var(--bd);border-radius:999px;cursor:pointer;min-height:44px;display:flex;align-items:center}
+label.o input:checked+span{background:var(--pr);color:#fff;border-color:var(--pr);font-weight:600}
+:root[data-hc] label.o input:checked+span{color:#000}
+label.o input:focus-visible+span,button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--wa);outline-offset:2px}
+.tip{background:rgba(0,87,184,.1);border-left:4px solid var(--pr);padding:.6rem .8rem;border-radius:6px;margin-bottom:1rem;display:flex;gap:.8rem;align-items:center}
+.tip .ic{font-size:2.2rem}
+.btn{background:var(--pr);color:#fff;border:2px solid var(--pr);border-radius:8px;padding:.7rem 1.2rem;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+:root[data-hc] .btn{color:#000}
+.btn.sec{background:transparent;color:var(--pr)}
+.nav{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}
+.kpi{border:1px solid var(--bd);border-radius:10px;padding:.7rem;text-align:center}.kpi b{font-size:1.6rem;display:block;color:var(--pr)}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;align-items:center}
+.banner{border-radius:10px;padding:.8rem 1rem;color:#fff;font-weight:700;font-size:1.1rem;margin:.6rem 0}
+.bar{display:flex;height:22px;border-radius:6px;overflow:hidden;position:relative;margin:.8rem 0 1.4rem}
+.bar i{flex:1;border-right:1px solid var(--card)}
+.bar u{position:absolute;top:-6px;bottom:-6px;width:4px;background:var(--tx);text-decoration:none;border-radius:2px}
+.sem{display:flex;flex-direction:column;gap:6px;background:#333;padding:10px;border-radius:30px;width:62px;margin:auto}
+.sem i{width:42px;height:42px;border-radius:50%;opacity:.2;display:block}.sem i.on{opacity:1;box-shadow:0 0 14px currentColor}
+.body svg{max-width:240px;width:100%;display:block;margin:auto}
+.rg{cursor:pointer;stroke:var(--tx);stroke-width:1}.s0{fill:var(--ok)}.s1{fill:var(--wa)}.s2{fill:var(--ba)}.sn{fill:var(--neu);stroke:none}
+.legend{display:flex;gap:.8rem;flex-wrap:wrap;font-size:.85rem;justify-content:center}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px;vertical-align:middle}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--bd);padding:.4rem .6rem;text-align:left;vertical-align:top}th{background:rgba(0,87,184,.1);width:36%}
+.pr{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}
+.pr>div{border-top:5px solid;border-radius:8px;background:rgba(128,128,128,.08);padding:.6rem .9rem}
+.pr ul,.card ul{margin:.3rem 0;padding-left:1.2rem}
+.chip{display:inline-block;background:var(--pr);color:#fff;border-radius:99px;padding:0 .6rem;font-size:.75rem;margin-right:.3rem}
+:root[data-hc] .chip{color:#000}
+.exp{display:flex;flex-wrap:wrap;gap:.5rem}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#222;color:#fff;padding:.6rem 1rem;border-radius:8px;opacity:0;transition:.3s;pointer-events:none;z-index:30;max-width:90%}#toast.show{opacity:1}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:20;padding:1rem}#modal.show{display:flex}
+#modal>div{background:var(--card);border-radius:12px;padding:1rem;max-width:640px;width:100%}
+textarea{width:100%;height:240px;font-family:monospace;background:var(--card);color:var(--tx);border:2px solid var(--bd);border-radius:8px;padding:.5rem}
+.foot{font-size:.8rem;color:var(--mu)}
+@media print{header.top,.prog,.noprint,#toast,#modal{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
+.stp{display:flex;gap:.3rem;list-style:none;padding:0;margin:0 0 .3rem;font-size:.7rem;overflow-x:auto}.stp li{flex:1;min-width:66px;text-align:center;color:var(--mu);border-top:4px solid var(--bd);padding-top:3px}.stp li.done{border-color:var(--ok);color:var(--tx)}.stp li.cur{border-color:var(--pr);color:var(--pr);font-weight:700}
+.fade{animation:fd .35s ease}@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.fade{animation:none}}
+label.o span{gap:.5rem}.em{font-size:1.3rem;font-weight:400}label.o small{opacity:.8}
+.s2{fill:var(--or)}.s3{fill:var(--ba)}
+.sig{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.2rem;margin-top:3rem}.sig div{border-top:1px solid var(--tx);padding-top:.3rem;text-align:center;font-size:.85rem}
+.cover{text-align:center;padding:2rem 1rem}#qr svg{width:150px;height:150px;background:#fff}
+@media print{.pb{break-before:page}}
+.live{position:sticky;top:0;z-index:5;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:.4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.8rem;box-shadow:0 2px 6px rgba(0,0,0,.12)}.live div{text-align:center;font-size:.72rem;border-radius:8px;padding:.2rem}.live b{display:block;font-size:1.25rem}
+.sel{display:flex;align-items:center;gap:.6rem;justify-content:center}.arr{font-size:1.3rem;min-width:48px;padding:.4rem}.pic{border:2px solid var(--bd);border-radius:10px;background:#fff;cursor:zoom-in;width:min(100%,300px)}.pic svg{width:100%;display:block}
+input[type=range]{width:100%;accent-color:var(--pr);margin-top:.5rem}.ticks{display:flex;justify-content:space-between;font-size:.8rem}.ok{border-color:var(--ok)}
+#zm{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:40;display:none;flex-direction:column;color:#fff}#zm.show{display:flex}#zm .zb{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;padding:1rem}#zm .zb>div{background:#fff;border-radius:10px;width:min(90vw,720px);transform-origin:center;transition:transform .2s}#zm .zt{display:flex;gap:.5rem;padding:.6rem;align-items:center;flex-wrap:wrap}#zm p{margin:0 1rem 1rem}
+.ph{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem}.ph img{height:90px;border-radius:8px;border:2px solid var(--bd);cursor:zoom-in}
+.hb{display:flex;align-items:center;gap:.5rem;font-size:.85rem}.hb i{display:block;height:16px;border-radius:4px;min-width:4px}
+td input{min-height:36px;margin:0}@media print{#live,#stp{display:none!important}}
+</style></head><body>
+<header class="top"><div class="brand">🎧 ROSA · Call Center y Oficinas</div>
+<div class="tools" role="toolbar" aria-label="Accesibilidad y navegación"><button data-act="hist">📚 Histórico ROSA</button><button data-act="z-" aria-label="Reducir texto">A-</button><button data-act="z+" aria-label="Aumentar texto">A+</button><span id="zs"></span><button data-act="hc" id="bhc" aria-pressed="false">Alto contraste</button><button data-act="dk" id="bdk" aria-pressed="false">Modo oscuro</button></div></header>
+<main><ol class="stp" id="stp" aria-label="Avance"></ol><div class="prog" role="progressbar" aria-label="Progreso" aria-valuemin="0" aria-valuemax="100" id="pg"><i></i></div><div id="live" class="live" hidden aria-live="polite"></div><div id="app"></div>
+<p class="foot">Implementación del método ROSA (Sonne, Villalta &amp; Andrews, 2012; NTP 1173). Las ilustraciones son esquemas de referencia propios, no las imágenes oficiales de la NTP. Las tablas D, E y F están simplificadas; verifique las tablas con la publicación oficial antes de usarlas en informes formales. Herramienta de apoyo: no sustituye la valoración de un especialista en ergonomía o SST.</p></main>
+<div id="zm" role="dialog" aria-modal="true" aria-label="Imagen ampliada"><div class="zt"><button class="btn" data-act="zo">− Alejar</button><button class="btn" data-act="zi">+ Acercar</button><button class="btn sec" style="color:#fff;border-color:#fff" data-act="zc">Cerrar ✕</button></div><div class="zb"><div id="zbx"></div></div><p id="zd"></p></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cl=(x,l,h)=>Math.max(l,Math.min(h,x)),ZS=[80,100,120,140,160];
+const AREAS=['Call Center','Atención al Cliente','Cobranzas','Televentas','Back Office','Recursos Humanos','Administrativo','Soporte Técnico','Recepción','Otro'];
+const CARGOS=['Agente de Call Center','Ejecutivo de Atención al Cliente','Operador de Cobranzas','Agente de Soporte Técnico','Teleoperador','Supervisor','Coordinador','Recepcionista','Asistente Administrativo','Analista Administrativo','Otro'];
+const TIEMPO=['Menos de 2 horas','Entre 2 y 4 horas','Entre 4 y 6 horas','Más de 6 horas'];
+const LAB=['Datos Generales','Silla','Pantalla y Teléfono','Teclado y Mouse','Resultados','Informe'];
+const IT={
+sh:{t:'Altura del asiento',d:['Rodillas a ≈90° y pies apoyados en el suelo.','Asiento algo bajo o alto: rodillas distintas de 90°.','Asiento muy alto o muy bajo: pies colgando o rodillas muy flexionadas.'],c:['Rodillas fuera de 90°','Pies sin apoyo','Reposapiés inexistente','Altura no ajustable'],r:'Ajustar la altura del asiento e incorporar reposapiés.',w:'SST / Compras'},
+pd:{t:'Profundidad del asiento',d:['≈3 dedos libres entre el borde del asiento y las corvas.','Asiento demasiado profundo: presiona las corvas.','Asiento muy corto: muslos sin apoyo.'],c:['Presión en las corvas','Muslos sin apoyo','Profundidad no ajustable','Apoya en el borde delantero'],r:'Ajustar la profundidad del asiento (≈3 dedos libres) o cambiar la silla.',w:'SST / Compras'},
+ar:{t:'Reposabrazos',d:['Codos apoyados y hombros relajados.','Reposabrazos demasiado altos, bajos o separados.','Sin reposabrazos o no se utilizan.'],c:['Superficie dura o dañada','No ajustables','Demasiado separados','Hombros elevados'],r:'Ajustar los reposabrazos a la altura del codo o incorporarlos.',w:'SST / Compras'},
+bk:{t:'Respaldo',d:['Soporte lumbar y respaldo inclinado entre 95° y 110°.','Sin soporte lumbar o inclinación fuera de rango.','Sin respaldo o no se utiliza.'],c:['Respaldo no ajustable','Mesa demasiado alta','Inclinación mayor a 110°','Espalda sin contacto'],r:'Mejorar el apoyo lumbar y ajustar el respaldo a 95°-110°.',w:'SST / Compras'},
+mh:{t:'Altura de la pantalla',d:['Borde superior del monitor a la altura de los ojos.','Monitor algo bajo o algo alto.','Monitor muy bajo o muy alto: flexión o extensión cervical.'],c:['Pantalla demasiado baja','Pantalla demasiado alta','Necesidad de flexión cervical','Monitor lateralizado'],r:'Elevar o bajar el monitor y centrarlo frente al trabajador.',w:'TI / SST'},
+md:{t:'Distancia visual',d:['Entre 50 y 75 cm (un brazo extendido).','Algo cerca o algo lejos.','Muy cerca o muy lejos: el trabajador se inclina.'],c:['Demasiado cerca','Demasiado lejos','Reflejos','Fatiga visual'],r:'Corregir la distancia visual (50-75 cm) y reducir reflejos.',w:'TI / SST'},
+ph:{t:'Teléfono',d:['Headset o manos libres, alcance cómodo.','Teléfono con uso ocasional con la mano.','Teléfono fuera de alcance o sujeto con el cuello.'],c:['Sujeta teléfono entre hombro y cuello','Uso prolongado','Sin auriculares','Sin manos libres'],r:'Implementar headset, usar manos libres y eliminar la sujeción cuello-hombro.',w:'TI / Compras'},
+kb:{t:'Teclado',d:['Muñecas neutras y codos a ≈90°.','Teclado algo alto o lejano.','Teclado muy alto o lejano: muñecas desviadas.'],c:['Muñecas extendidas','Muñecas flexionadas','Teclado elevado','Alcance excesivo'],r:'Reubicar el teclado, corregir la postura de muñecas e incorporar bandeja ergonómica.',w:'SST / Compras'},
+ms:{t:'Mouse',d:['Mouse junto al teclado y hombro relajado.','Mouse algo alejado.','Mouse muy alejado con hombro elevado.'],c:['Mouse alejado','Alcance forzado','Hombro elevado','Puntos de presión'],r:'Acercar el mouse, alinearlo con el hombro y reducir alcances.',w:'SST / Compras'}};
+const DOC=['Sin portadocumentos','Giro frecuente de cuello'];
+const SEC={1:['sh','pd','ar','bk'],2:['mh','md','ph'],3:['kb','ms']};
+const PIC={sh:[{},{seat:88,sa:35},{seat:62,sa:-10}],pd:[{},{sd:56},{sd:14}],ar:[{arm:64},{arm:52,sh:1},{ua:12}],bk:[{bk:12,lum:1},{bk:2},{bk:38}],mh:[{},{mon:[124,46]},{mon:[124,0]}],md:[{},{mon:[100,20]},{mon:[152,20]}],ph:[{ph:1},{ph:2},{ph:3,n:28}],kb:[{},{desk:56,fa:20},{desk:50,fa:35,sh:1}],ms:[{ms:108},{ms:128},{ms:150,sh:1,ua:30}]};
+function fig(p){const q={seat:78,sa:0,t:8,n:10,ua:5,fa:3,sd:38,desk:66,arm:-1,bk:8,lum:0,mon:[124,20],kb:104,ms:112,ph:0,sh:0,...p},R=Math.PI/180,Q=q.seat,sx=60-Math.sin(q.t*R)*38,sy=Q-Math.cos(q.t*R)*38-(q.sh?5:0),hx=sx+Math.sin(q.n*R)*13,hy=sy-Math.cos(q.n*R)*13-5,ex=sx+Math.sin(q.ua*R)*24,ey=sy+Math.cos(q.ua*R)*24,dx=ex+Math.cos(q.fa*R)*22,dy=ey-Math.sin(q.fa*R)*22,kx=94,fx=kx+Math.sin(q.sa*R)*34,fy=Q+Math.cos(q.sa*R)*34;
+ const L=(a,b,c,d,w,k,x)=>`<line x1="${a.toFixed?a.toFixed(1):a}" y1="${b.toFixed(1)}" x2="${c.toFixed(1)}" y2="${d.toFixed(1)}" stroke="${k||'#222'}" stroke-width="${w||6}" stroke-linecap="round" ${x||''}/>`;
+ return L(0,112,160,112,2,'#999')+L(54,Q,54,104,4,'#888')+L(40,108,70,108,4,'#888')+L(50,Q,50+q.sd,Q,5,'#888')+L(48,Q,48-Math.sin(q.bk*R)*42,Q-Math.cos(q.bk*R)*42,5,'#888')+(q.lum?`<circle cx="${(48-Math.sin(q.bk*R)*18+4).toFixed(1)}" cy="${Q-18}" r="5" fill="#2E7D32"/>`:'')+(q.arm>0?L(52,q.arm,72,q.arm,4,'#888'):'')
+ +L(92,q.desk,160,q.desk,3,'#555')+`<rect x="${q.mon[0]}" y="${q.mon[1]}" width="5" height="22" fill="#0057B8"/>`+L(q.mon[0]+2,q.mon[1]+22,q.mon[0]+2,q.desk,2,'#555')+`<rect x="${q.kb}" y="${q.desk-3}" width="20" height="3" fill="#5A5A5A"/><circle cx="${q.ms}" cy="${q.desk-3}" r="3" fill="#D32F2F"/>`
+ +L(hx,hy,160,hy,1,'#0057B8','stroke-dasharray="3"')+L(60,Q,sx,sy)+L(60,Q,kx,Q)+L(kx,Q,fx,fy)+L(sx,sy,ex,ey,5)+L(ex,ey,dx,dy,5)+`<circle cx="${hx.toFixed(1)}" cy="${hy.toFixed(1)}" r="7" fill="#222"/>`
+ +(q.ph==1?`<path d="M${(hx-8).toFixed(1)} ${hy.toFixed(1)}a8 8 0 0 1 16 0" fill="none" stroke="#2E7D32" stroke-width="3"/>`:q.ph==2?L(dx,dy,hx+4,hy+3,3,'#D32F2F'):q.ph==3?L(hx-4,hy+3,hx+1,sy+3,4,'#D32F2F'):'')}
+const pic=(k,s)=>`<svg viewBox="0 0 160 120" role="img" aria-label="${IT[k].t}: puntuación ${s}. ${IT[k].d[s-1]}">${fig(PIC[k][s-1])}<text x="4" y="12" font-size="10" fill="#0057B8" font-weight="700">Puntuación ${s}</text></svg>`;
+// Tablas ROSA
+const TA=[[2,2,3,4,5,6,7,8],[2,2,3,4,5,6,7,8],[3,3,3,4,5,6,7,8],[4,4,4,4,5,6,7,8],[5,5,5,5,6,7,8,9],[6,6,6,7,7,8,8,9],[7,7,7,8,8,9,9,9]];
+const TB=[[1,1,1,2,3,4,5,6],[1,1,2,2,3,4,5,6],[1,2,2,3,3,4,6,7],[2,2,3,3,4,5,6,8],[3,3,4,4,5,6,7,8],[4,4,5,5,6,7,8,9],[5,5,6,7,8,8,9,9],[6,6,7,8,8,9,9,9]];
+const TC=[[1,1,1,2,3,4,5,6],[1,1,2,3,4,5,6,7],[1,2,2,3,4,5,6,7],[2,3,3,3,5,6,7,8],[3,4,4,5,5,6,7,8],[4,5,5,6,6,7,8,9],[5,6,6,7,7,8,8,9],[6,7,7,8,8,9,9,9]];
+const TD=Array.from({length:9},(_,i)=>Array.from({length:9},(_,j)=>Math.max(i,j)+1));
+const TE=Array.from({length:10},(_,i)=>Array.from({length:9},(_,j)=>Math.max(i+1,j+1)));
+const TF=s=>s<=2?{n:'Bajo',e:'🟢',c:'var(--ok)'}:s<=4?{n:'Moderado',e:'🟡',c:'#b88a00'}:s<=6?{n:'Alto',e:'🟠',c:'var(--or)'}:{n:'Muy Alto',e:'🔴',c:'var(--ba)'};
+const ACT=s=>s>=5?'Nivel de actuación requerido: se recomienda intervención ergonómica.':'Sin necesidad inmediata de actuación; mantener seguimiento.';
+const today=()=>new Date().toISOString().slice(0,10);
+let S={step:0,view:'e',a:0,s:{},cr:{},ok:{},nph:false,g:{},photos:[],plan:[],zoom:100,dark:null,hc:false,id:'',pdf:false};
+try{const r=localStorage.getItem('rosacc_state');if(r)Object.assign(S,JSON.parse(r))}catch(e){}
+const save=()=>{try{localStorage.setItem('rosacc_state',JSON.stringify(S))}catch(e){}};
+function toast(m){const t=$('#toast');t.textContent=m;t.className='show';clearTimeout(toast.t);toast.t=setTimeout(()=>t.className='',3200)}
+function applyUI(){const h=document.documentElement;h.style.fontSize=S.zoom+'%';S.dark===true?h.setAttribute('data-theme','dark'):S.dark===false?h.setAttribute('data-theme','light'):h.removeAttribute('data-theme');S.hc?h.setAttribute('data-hc',''):h.removeAttribute('data-hc');
+ $('#bhc').setAttribute('aria-pressed',S.hc);$('#bdk').setAttribute('aria-pressed',S.dark===true||(S.dark===null&&matchMedia('(prefers-color-scheme:dark)').matches));$('#zs').innerHTML=ZS.map(z=>`<button data-act="zs" data-z="${z}" aria-pressed="${z==S.zoom}">${z}%</button>`).join('')}
+const sel=k=>S.s[k]||1,ci=k=>Math.min(4,sel(k)+(S.cr[k]||[]).length);
+const done=n=>SEC[n].every(k=>k=='ph'?(S.nph||S.ok.ph):S.ok[k]);
+function calc(){const dur=[-1,0,1,1][S.g.t==null?1:S.g.t],dc=(S.cr.doc||[]).length,
+ ch=cl(TA[cl(ci('sh')+ci('pd'),2,8)-2][cl(ci('ar')+ci('bk'),2,9)-2]+dur,1,10),mon=cl(ci('mh')+ci('md')-1+dc+dur,1,7),ph=S.nph?0:ci('ph'),
+ B=TB[ph][mon],kb=cl(ci('kb')+dur,1,7),ms=cl(ci('ms')+dur,1,7),C=TC[kb][ms],D=TD[B-1][C-1],E=TE[ch-1][D-1];
+ const f=[];Object.keys(IT).forEach(k=>{if(k=='ph'&&S.nph)return;const v=ci(k);if(v>=2)f.push({k,v,t:IT[k].t,x:(S.cr[k]||[]).map(i=>IT[k].c[i])})});
+ if(dc)f.push({k:'doc',v:1+dc,t:'Uso de documentos',x:S.cr.doc.map(i=>DOC[i])});
+ f.sort((a,b)=>b.v-a.v);return{ch,mon,ph,B,kb,ms,C,D,E,f,dur}}
+function conc(r){const g=S.g,L=TF(r.E),top=r.f.slice(0,3).map(x=>x.t.toLowerCase());return`La evaluación realizada al puesto "${g.cargo}" (${g.trab}) obtuvo una puntuación ROSA de ${r.E}. ${r.E>=5?'El resultado indica un nivel de actuación que requiere intervención ergonómica.':'El resultado indica un riesgo '+L.n.toLowerCase()+'.'} ${top.length?'Los principales factores de riesgo identificados corresponden a '+top.join(', ')+'.':'No se identificaron factores de riesgo relevantes.'} Se recomienda implementar las acciones propuestas y realizar una reevaluación posterior para verificar la efectividad de las mejoras.`}
+function arcP(d0,d1,r){const p=d=>{const a=Math.PI*(1-d/180);return[(100+r*Math.cos(a)).toFixed(1),(100-r*Math.sin(a)).toFixed(1)]},a=p(d0),b=p(d1);return`M${a[0]} ${a[1]}A${r} ${r} 0 0 1 ${b[0]} ${b[1]}`}
+function gauge(s){const seg=[[0,36,'var(--ok)'],[36,72,'var(--wa)'],[72,108,'var(--or)'],[108,180,'var(--ba)']],a=Math.PI*(1-(s-.5)*18/180);
+ return`<svg viewBox="0 0 200 125" role="img" aria-label="Velocímetro ROSA ${s} de 10">${seg.map(x=>`<path d="${arcP(x[0],x[1],80)}" stroke="${x[2]}" stroke-width="20" fill="none"/>`).join('')}<line x1="100" y1="100" x2="${(100+68*Math.cos(a)).toFixed(1)}" y2="${(100-68*Math.sin(a)).toFixed(1)}" stroke="var(--tx)" stroke-width="4" stroke-linecap="round" style="transition:all .6s"/><circle cx="100" cy="100" r="7" fill="var(--tx)"/><text x="100" y="122" text-anchor="middle" font-size="16" font-weight="700" fill="var(--tx)">ROSA ${s}</text></svg>`}
+function sem(s){const t=s<=2?0:s<=4?1:s<=6?2:3;return`<div class="sem" aria-label="Semáforo de riesgo">${['var(--ok)','var(--wa)','var(--or)','var(--ba)'].map((c,i)=>`<i style="background:${c};color:${c}" class="${i==t?'on':''}"></i>`).join('')}</div>`}
+function vals(r){return[['Silla',r.ch,10],['Pantalla',r.mon,7],['Teléfono',r.ph,4],['Teclado',r.kb,7],['Mouse',r.ms,7]]}
+function radar(r){const v=vals(r),n=v.length,pt=(i,f)=>{const a=-Math.PI/2+i*2*Math.PI/n;return[(100+70*f*Math.cos(a)).toFixed(1),(100+70*f*Math.sin(a)).toFixed(1)]};
+ return`<svg viewBox="0 0 200 200" role="img" aria-label="Radar de factores críticos">${[.33,.66,1].map(f=>`<polygon points="${v.map((_,i)=>pt(i,f).join(',')).join(' ')}" fill="none" stroke="var(--bd)"/>`).join('')}<polygon points="${v.map((x,i)=>pt(i,x[1]/x[2]).join(',')).join(' ')}" fill="rgba(211,47,47,.35)" stroke="var(--ba)" stroke-width="2"/>${v.map((x,i)=>{const p=pt(i,1.18);return`<text x="${p[0]}" y="${p[1]}" font-size="9" text-anchor="middle" fill="var(--tx)">${x[0]}</text>`}).join('')}</svg>`}
+function bars(r){return vals(r).map(x=>`<div class="hb"><span style="width:70px">${x[0]}</span><i style="width:${x[1]/x[2]*60}%;background:${TF(Math.ceil(x[1]/x[2]*10)).c}"></i><b>${x[1]}</b></div>`).join('')}
+function wmap(){const c=k=>['var(--ok)','var(--ok)','var(--wa)','var(--or)','var(--ba)'][ci(k)];return`<svg viewBox="0 0 220 150" role="img" aria-label="Mapa de la estación de trabajo"><rect x="20" y="10" width="180" height="70" rx="6" fill="var(--bd)"/><rect x="85" y="14" width="50" height="8" fill="${c('mh')}"/><text x="110" y="34" font-size="8" text-anchor="middle" fill="var(--tx)">Pantalla / distancia</text><rect x="80" y="45" width="60" height="14" fill="${c('kb')}"/><text x="110" y="55" font-size="8" text-anchor="middle" fill="#fff">Teclado</text><circle cx="160" cy="52" r="8" fill="${c('ms')}"/><text x="160" y="72" font-size="8" text-anchor="middle" fill="var(--tx)">Mouse</text><rect x="25" y="25" width="30" height="20" fill="${S.nph?'var(--neu)':c('ph')}"/><text x="40" y="38" font-size="8" text-anchor="middle" fill="#fff">Teléfono</text><circle cx="110" cy="115" r="28" fill="${c('sh')}"/><rect x="85" y="132" width="50" height="10" rx="4" fill="${c('bk')}"/><rect x="70" y="95" width="10" height="35" fill="${c('ar')}"/><rect x="140" y="95" width="10" height="35" fill="${c('ar')}"/><text x="110" y="118" font-size="9" text-anchor="middle" fill="#fff">Silla</text></svg>`}
+function liveBar(){const b=$('#live');if(S.view!='e'||S.step<1||S.step>5||!S.a){b.hidden=true;return}const r=calc(),L=TF(r.E),v=(n,x)=>done(n)?x:'—';b.hidden=false;
+ b.innerHTML=`<div>Silla<b>${v(1,r.ch)}</b></div><div>Pantalla y Teléfono<b>${v(2,r.B)}</b></div><div>Teclado y Mouse<b>${v(3,r.C)}</b></div><div style="background:${L.c};color:#fff">ROSA parcial<b>${r.E}</b>${L.e} ${L.n}</div>`}
+function item(k){const I=IT[k],s=sel(k),ok=S.ok[k],cr=S.cr[k]||[];
+ return`<fieldset class="item ${ok?'ok':''}" data-k="${k}"><legend>${I.t}${ok?' ✅':''}</legend><div class="sel"><button class="btn sec arr" data-act="dec" data-k="${k}" aria-label="Puntuación anterior">◄</button><div class="pic" tabindex="0" role="button" data-act="zoom" data-k="${k}" aria-label="Ampliar imagen de referencia">${pic(k,s)}</div><button class="btn sec arr" data-act="inc" data-k="${k}" aria-label="Puntuación siguiente">►</button></div>
+<input type="range" min="1" max="3" step="1" value="${s}" name="r_${k}" aria-label="Puntuación de ${I.t}"><div class="ticks" aria-hidden="true"><span>1</span><span>2</span><span>3</span></div>
+<p><b>Puntuación ${s}:</b> ${I.d[s-1]} <small>(toque la imagen para ampliar)</small></p>
+${ok?`<p><b>Criterios adicionales</b> (cada uno suma +1)</p><div class="opts">${I.c.map((t,i)=>`<label class="o"><input type="checkbox" name="c_${k}_${i}" ${cr.includes(i)?'checked':''}><span>${t}</span></label>`).join('')}</div><p><b>Puntaje del ítem: ${ci(k)}</b> · <button class="btn sec" style="min-height:36px;padding:.2rem .7rem" data-act="ed" data-k="${k}">Modificar puntuación</button></p>`:`<button class="btn" data-act="ok" data-k="${k}">Confirmar puntuación</button>`}</fieldset>`}
+function rStart(){const g=S.g,o=(a,v)=>a.map(x=>`<option${v==x?' selected':''}>${x}</option>`).join('');
+ return`<section class="card fade"><div class="tip" style="border:0;background:none;padding:0"><div class="ic">🎧</div><div><h1>Evaluación Ergonómica ROSA</h1><b>Rapid Office Strain Assessment</b><p class="sub" style="margin:.2rem 0 0">Evaluación de estaciones de trabajo administrativas y Call Center.</p></div></div></section>
+<section class="card fade"><h2>Datos generales</h2><div class="grid2"><label class="f">Evaluador *<input type="text" name="g_ev" value="${esc(g.ev)}" required></label><label class="f">Empresa *<input type="text" name="g_em" value="${esc(g.em)}" required></label>
+<label class="f">Área *<select name="g_ar"><option value="">Seleccione…</option>${o(AREAS,g.ar)}</select></label><label class="f">Nombre del trabajador *<input type="text" name="g_trab" value="${esc(g.trab)}" required></label>
+<label class="f">Cargo *<select name="g_cargo"><option value="">Seleccione…</option>${o(CARGOS,g.cargo)}</select></label></div>
+<fieldset style="margin-top:.8rem"><legend>Tiempo diario frente a pantalla *</legend><div class="opts">${TIEMPO.map((t,i)=>`<label class="o"><input type="radio" name="g_t" value="${i}" ${g.t==i?'checked':''}><span>${t}</span></label>`).join('')}</div></fieldset>
+<button class="btn" data-act="start">INICIAR EVALUACIÓN ROSA</button></section>`}
+function rStep(n){const T={1:['SECCIÓN A · Silla',SEC[1].map(item).join('')],2:['SECCIÓN B · Pantalla y Teléfono',item('mh')+item('md')+`<fieldset><legend>Uso de documentos</legend><div class="opts">${DOC.map((t,i)=>`<label class="o"><input type="checkbox" name="c_doc_${i}" ${(S.cr.doc||[]).includes(i)?'checked':''}><span>${t}</span></label>`).join('')}</div></fieldset><label class="o" style="display:block;margin-bottom:.6rem"><input type="checkbox" name="nph" ${S.nph?'checked':''}><span>El trabajador no utiliza teléfono</span></label>${S.nph?'':item('ph')}`],
+ 3:['SECCIÓN C · Teclado y Mouse',item('kb')+item('ms')+`<fieldset><legend>Evidencia fotográfica</legend><div class="exp"><label class="btn" tabindex="0">📷 Tomar fotografía<input type="file" accept="image/*" capture="environment" name="ph_c" hidden></label><label class="btn sec" tabindex="0">📁 Subir fotografía<input type="file" accept="image/jpeg,image/png,image/webp" name="ph_f" multiple hidden></label></div><div class="ph" id="phs">${phs()}</div><small>JPG, PNG o WEBP · máximo 3 fotografías.</small></fieldset>`]}[n];
+ return`<section class="card fade"><p class="sub" style="margin:0">Imágenes: esquemas de referencia ampliables</p><h2 tabindex="-1" id="hd">${T[0]}</h2>${T[1]}<div class="nav"><button class="btn sec" data-act="back">← Atrás</button><button class="btn" data-act="next">${n==3?'Calcular resultados':'Siguiente →'}</button></div></section>`}
+const phs=()=>S.photos.map((p,i)=>`<span><img src="${p}" alt="Fotografía ${i+1} del puesto" data-act="zph" data-i="${i}" tabindex="0"><br><button class="btn sec" style="min-height:30px;padding:0 .5rem" data-act="rph" data-i="${i}">Quitar</button></span>`).join('');
+function genPlan(){const r=calc();S.plan=r.f.map(x=>{const d=new Date();d.setDate(d.getDate()+[0,30,30,15,7][x.v]);return{f:x.t+(x.x.length?' ('+x.x.join(', ')+')':''),r:['','Bajo','Moderado','Alto','Muy alto'][x.v],a:(IT[x.k]||{r:'Instalar portadocumentos frente al usuario.'}).r,w:(IT[x.k]||{w:'SST'}).w,d:d.toISOString().slice(0,10)}})}
+function planT(){return`<div style="overflow-x:auto"><table><tr><th>Hallazgo</th><th>Riesgo</th><th>Acción correctiva</th><th>Responsable</th><th>Fecha</th></tr>${S.plan.map((p,i)=>`<tr><td>${esc(p.f)}</td><td>${p.r}</td><td><input type="text" name="p_a_${i}" value="${esc(p.a)}" aria-label="Acción correctiva ${i+1}"></td><td><input type="text" name="p_w_${i}" value="${esc(p.w)}" aria-label="Responsable ${i+1}"></td><td><input type="text" name="p_d_${i}" value="${esc(p.d)}" aria-label="Fecha ${i+1}" style="min-width:110px"></td></tr>`).join('')||'<tr><td colspan="5">Sin hallazgos.</td></tr>'}</table></div>`}
+function rRes(){const r=calc(),L=TF(r.E);
+ return`<section class="card fade"><h2 tabindex="-1" id="hd">Resultados</h2><div class="dash"><div>${gauge(r.E)}</div><div style="text-align:center"><div class="sub">PUNTUACIÓN ROSA FINAL</div><div style="font-size:3rem;font-weight:800;color:${L.c}">ROSA = ${r.E}</div><div class="banner" style="background:${L.c}">${L.e} Riesgo ${L.n}</div><p>${ACT(r.E)}</p></div>${sem(r.E)}</div></section>
+<section class="card fade"><div class="kpis"><div class="kpi"><b>${r.ch}</b>Silla (Tabla A)</div><div class="kpi"><b>${r.B}</b>Pantalla + Teléfono (B)</div><div class="kpi"><b>${r.C}</b>Teclado + Mouse (C)</div><div class="kpi"><b>${r.D}</b>Periféricos (D)</div><div class="kpi"><b>${r.E}</b>Final (E/F)</div></div></section>
+<section class="card fade"><div class="dash"><div><h3>Radar de factores críticos</h3>${radar(r)}</div><div><h3>Barras comparativas</h3>${bars(r)}</div><div><h3>Mapa de la estación</h3>${wmap()}</div></div></section>
+<section class="card fade"><h3>Recomendaciones automáticas</h3><ul>${r.f.map(x=>`<li><span class="chip">${x.t}</span>${(IT[x.k]||{r:'Instalar portadocumentos frente al usuario.'}).r}${x.x.length?' <small>Factores: '+x.x.join(', ')+'</small>':''}</li>`).join('')||'<li>Sin hallazgos relevantes: mantener las condiciones actuales.</li>'}</ul>
+<h3>Plan de acción (editable)</h3>${planT()}<p><button class="btn sec" data-act="regen">Regenerar plan</button></p><div class="nav"><button class="btn sec" data-act="back">← Revisar</button><button class="btn" data-act="next">📄 Ir al informe</button></div><p class="foot">✅ Evaluación guardada automáticamente en el histórico (${DB?'compartido':'este navegador'}).</p></section>`}
+function rRep(){const r=calc(),L=TF(r.E),g=S.g,n=new Date(),sc=(t,v)=>`<tr><th>${t}</th><td>${v}</td></tr>`;
+ return`<section class="card fade"><div class="cover"><h1 tabindex="-1" id="hd">Informe de Evaluación Ergonómica ROSA</h1><div class="sub">${esc(S.id)}</div></div><table>${sc('Empresa',esc(g.em))+sc('Área',esc(g.ar))+sc('Trabajador',esc(g.trab))+sc('Cargo',esc(g.cargo))+sc('Evaluador',esc(g.ev))+sc('Fecha y hora',n.toLocaleString('es'))+sc('Tiempo frente a pantalla',TIEMPO[g.t])}</table></section>
+${S.photos.length?`<section class="card"><h3>Fotografías</h3><div class="ph">${S.photos.map((p,i)=>`<img src="${p}" alt="Fotografía ${i+1}">`).join('')}</div></section>`:''}
+<section class="card pb"><h2>Resultado ROSA</h2><div class="dash"><div>${gauge(r.E)}</div><div><div class="banner" style="background:${L.c}">${L.e} ROSA = ${r.E} · Riesgo ${L.n}</div><p>${ACT(r.E)}</p></div></div><table>${sc('Silla (Tabla A)',r.ch)+sc('Pantalla y Teléfono (Tabla B)',r.B)+sc('Teclado y Mouse (Tabla C)',r.C)+sc('Periféricos (Tabla D)',r.D)+sc('ROSA final (Tablas E/F)',r.E)}</table>
+<h3>Hallazgos y acciones prioritarias</h3><ul>${r.f.map(x=>`<li><b>${x.t}</b> (puntaje ${x.v}): ${(IT[x.k]||{r:'Instalar portadocumentos.'}).r}</li>`).join('')||'<li>Sin hallazgos.</li>'}</ul><h3>Plan de acción</h3><div style="overflow-x:auto"><table><tr><th>Hallazgo</th><th>Riesgo</th><th>Acción correctiva</th><th>Responsable</th><th>Fecha</th></tr>${S.plan.map(p=>`<tr><td>${esc(p.f)}</td><td>${p.r}</td><td>${esc(p.a)}</td><td>${esc(p.w)}</td><td>${esc(p.d)}</td></tr>`).join('')}</table></div>
+<h3>Conclusión</h3><p>${esc(conc(r))}</p><div class="sig"><div>Evaluador</div><div>Trabajador</div><div>Supervisor</div><div>Fecha</div></div></section>
+<section class="card noprint"><div class="exp"><button class="btn" data-act="pdf">📄 Generar Informe ROSA</button><button class="btn" data-act="xlsx">📊 Descargar Excel histórico</button><button class="btn sec" data-act="hist">📚 Histórico ROSA</button><button class="btn sec" data-act="new">Nueva evaluación</button><button class="btn sec" data-act="back">← Volver</button></div><p class="foot">El PDF se genera con el diálogo de impresión («Guardar como PDF») con el nombre ${esc(pdfName())}.</p></section>`}
+const pdfName=()=>('ROSA_'+S.id+'_'+(S.g.trab||'').replace(/\s+/g,'_')+'.pdf');
+// Almacenamiento
+let DB=null,HIST=[];
+function loadLocal(){try{HIST=JSON.parse(localStorage.getItem('rosacc_hist')||'[]')}catch(e){HIST=[]}}
+async function initStore(){loadLocal();try{if(window.claude&&claude.use){const db=await claude.use('db');if(db){DB=db.collection('evaluaciones');DB.onSnapshot(s=>{HIST=s.docs.map(d=>d.data()).sort((a,b)=>(b.ts||0)-(a.ts||0));if(S.view=='h')histTbl()},()=>{DB=null})}}}catch(e){DB=null}}
+function persist(){if(!S.a||!S.id)return;const r=calc(),g=S.g,n=new Date(),L=TF(r.E),rec={id:S.id,ts:n.getTime(),fecha:today(),hora:n.toLocaleTimeString('es'),empresa:g.em,area:g.ar,trabajador:g.trab,cargo:g.cargo,evaluador:g.ev,rosa:r.E,nivel:'Riesgo '+L.n,hallazgo:r.f[0]?r.f[0].t:'Sin hallazgos',fechaEval:today(),estado:S.pdf?'Informe generado':'Completada',pdf:S.pdf?pdfName():'',ruta:S.pdf?'Descargas del dispositivo':'',fotos:S.photos.length,photos:S.photos,plan:S.plan,sc:[r.ch,r.B,r.C]};
+ if(DB)DB.doc(rec.id).set(rec).catch(()=>toast('No fue posible guardar en el histórico compartido'));else{HIST=[rec,...HIST.filter(x=>x.id!=rec.id)];try{localStorage.setItem('rosacc_hist',JSON.stringify(HIST.slice(0,40)))}catch(e){toast('Almacenamiento local lleno')}}}
+function rows(h){return h.map(x=>({ID:x.id,Fecha:x.fecha,Hora:x.hora,Empresa:x.empresa,'Área':x.area,Trabajador:x.trabajador,Cargo:x.cargo,Evaluador:x.evaluador,'Resultado ROSA':x.rosa,'Nivel de Riesgo':x.nivel,'Hallazgo Principal':x.hallazgo,'Fecha de Evaluación':x.fechaEval,Estado:x.estado,'Nombre del PDF':x.pdf,'Ruta del PDF':x.ruta}))}
+async function xlsx(){if(!window.XLSX){toast('No se pudo cargar la librería de Excel');return}const ws=XLSX.utils.json_to_sheet(rows(HIST));ws['!autofilter']={ref:ws['!ref']||'A1'};const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Histórico ROSA');const buf=XLSX.write(wb,{bookType:'xlsx',type:'array'});
+ try{const d=window.claude&&claude.use?await claude.use('downloads'):null;if(d){await d.save({filename:'Historico_ROSA.xlsx',data:buf});toast('Excel listo')}else{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([buf]));a.download='Historico_ROSA.xlsx';a.click();toast('Si no se descarga, abra la página en el navegador')}}catch(e){toast('Descarga cancelada o no disponible')}}
+function rHist(){const cg=[...new Set(HIST.map(x=>x.cargo))],lab=x=>`${x.trabajador} · ${x.fecha} · ROSA ${x.rosa}`;
+ return`<section class="card fade"><h2 tabindex="-1" id="hd">📚 Histórico ROSA</h2><p class="sub">${DB?'Histórico compartido (centralizado).':'Histórico guardado en este navegador.'} ${HIST.length} evaluaciones.</p><div class="grid2"><label class="f">Buscar trabajador<input type="text" id="hq"></label><label class="f">Cargo<select id="hc"><option value="">Todos</option>${cg.map(c=>`<option>${esc(c)}</option>`).join('')}</select></label><label class="f">Desde<input type="text" id="hd1" placeholder="AAAA-MM-DD"></label><label class="f">Hasta<input type="text" id="hd2" placeholder="AAAA-MM-DD"></label><label class="f">ROSA mínimo<input type="text" id="hr1" placeholder="1"></label><label class="f">ROSA máximo<input type="text" id="hr2" placeholder="10"></label></div><div id="ht"></div><div class="exp noprint" style="margin-top:.6rem"><button class="btn" data-act="xlsx">📊 Exportar Excel</button><button class="btn sec" data-act="${S.a?'ret':'new'}">${S.a?'← Volver a la evaluación':'Nueva evaluación'}</button></div></section>
+<section class="card fade"><h3>Comparación histórica</h3><div class="grid2"><label class="f">Evaluación inicial<select id="ca"><option value="">Seleccione…</option>${HIST.map((x,i)=>`<option value="${i}">${esc(lab(x))}</option>`).join('')}</select></label><label class="f">Reevaluación<select id="cb"><option value="">Seleccione…</option>${HIST.map((x,i)=>`<option value="${i}">${esc(lab(x))}</option>`).join('')}</select></label></div><div id="cmp"></div></section>`}
+function histTbl(){const q=($('#hq')||{}).value||'',c=$('#hc').value,d1=$('#hd1').value,d2=$('#hd2').value,r1=+$('#hr1').value||1,r2=+$('#hr2').value||10;
+ const l=HIST.filter(x=>(!q||(x.trabajador||'').toLowerCase().includes(q.toLowerCase()))&&(!c||x.cargo==c)&&(!d1||x.fecha>=d1)&&(!d2||x.fecha<=d2)&&x.rosa>=r1&&x.rosa<=r2);
+ $('#ht').innerHTML=`<div style="overflow-x:auto"><table><tr><th>Fecha</th><th>Trabajador</th><th>Cargo</th><th>ROSA</th><th>Riesgo</th><th>Hallazgo</th></tr>${l.map(x=>`<tr><td>${esc(x.fecha)}</td><td>${esc(x.trabajador)}</td><td>${esc(x.cargo)}</td><td><b>${x.rosa}</b></td><td>${esc(x.nivel)}</td><td>${esc(x.hallazgo)}</td></tr>`).join('')||'<tr><td colspan="6">Sin resultados.</td></tr>'}</table></div>`}
+function cmp(){const a=HIST[$('#ca').value],b=HIST[$('#cb').value];if(!a||!b){$('#cmp').innerHTML='';return}const p=((a.rosa-b.rosa)/a.rosa*100),bar=(x,l)=>`<div class="hb"><span style="width:110px">${l}</span><i style="width:${x.rosa*8}%;background:${TF(x.rosa).c}"></i><b>${x.rosa}</b></div>`;
+ $('#cmp').innerHTML=`<p>${bar(a,'Inicial')}${bar(b,'Reevaluación')}</p><p style="font-size:1.2rem"><b>${p>=0?'📉 Reducción del riesgo':'📈 Aumento del riesgo'}: ${Math.abs(p).toFixed(1)}%</b></p>`}
+function render(){applyUI();const v=S.view=='h'?rHist():S.step==0?rStart():S.step<4?rStep(S.step):S.step==4?rRes():rRep();$('#app').innerHTML=v;
+ if(S.view=='h'){histTbl()}
+ $('#stp').innerHTML=LAB.map((l,i)=>`<li class="${i<S.step?'done':i==S.step?'cur':''}"${i==S.step?' aria-current="step"':''}>${l}</li>`).join('');const p=Math.round(S.step/5*100);$('#pg').setAttribute('aria-valuenow',p);$('#pg i').style.width=p+'%';liveBar();
+ if(S.step>0||S.view=='h'){window.scrollTo(0,0);const h=$('#hd');h&&h.focus({preventScroll:true})}save()}
+function upd(k,f){const o=document.querySelector(`.item[data-k=${k}]`);if(!o)return;o.outerHTML=item(k);if(f){const n=document.querySelector(`.item[data-k=${k}] input[type=range]`);n&&n.focus()}liveBar();save()}
+function setS(k,v,f){S.s[k]=cl(v,1,3);S.ok[k]=false;upd(k,f)}
+function resize(file){return new Promise(res=>{const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const m=Math.min(1,420/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*m;c.height=im.height*m;c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.55))};im.onerror=()=>res(null);im.src=fr.result};fr.onerror=()=>res(null);fr.readAsDataURL(file)})}
+function zoomOpen(html,d){Z=1;$('#zbx').innerHTML=html;$('#zbx').style.transform='scale(1)';$('#zd').textContent=d||'';$('#zm').className='show';$('#zm .btn').focus()}
+let Z=1,pt;
+document.addEventListener('keydown',e=>{if(e.key=='Escape')$('#zm').className='';if(e.key=='Enter'&&e.target.dataset&&e.target.dataset.act=='zoom')e.target.click()});
+document.addEventListener('input',e=>{const t=e.target;if(t.name&&t.name.startsWith('g_')){S.g[t.name.slice(2)]=t.value;save()}else if(t.name&&t.name.startsWith('r_')){setS(t.name.slice(2),+t.value,true)}else if(t.name&&t.name.startsWith('p_')){const[,f,i]=t.name.split('_');S.plan[i][f]=t.value;clearTimeout(pt);pt=setTimeout(()=>{persist();save()},600)}else if(S.view=='h'&&t.id&&t.id[0]=='h')histTbl()});
+document.addEventListener('change',async e=>{const t=e.target;if(!t.name){if(t.id=='ca'||t.id=='cb')cmp();else if(t.id=='hc')histTbl();return}
+ if(t.name.startsWith('g_')){S.g[t.name.slice(2)]=t.name=='g_t'?+t.value:t.value;if(t.name=='g_t')liveBar()}
+ else if(t.name.startsWith('c_')){const[,k,i]=t.name.split('_');S.cr[k]=(S.cr[k]||[]).filter(x=>x!=+i);if(t.checked)S.cr[k].push(+i);k=='doc'?liveBar():upd(k)}
+ else if(t.name=='nph'){S.nph=t.checked;render();return}
+ else if(t.name.startsWith('ph_')){for(const f of [...t.files]){if(S.photos.length>=3){toast('Máximo 3 fotografías');break}const d=await resize(f);if(d)S.photos.push(d);else toast('Formato de imagen no válido')}t.value='';$('#phs').innerHTML=phs()}
+ save()});
+const REQ={1:'la silla',2:'la pantalla y el teléfono',3:'el teclado y el mouse'};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const act=b.dataset.act,k=b.dataset.k;
+ if(act=='z-'){S.zoom=ZS[Math.max(0,ZS.indexOf(S.zoom)-1)]||100;applyUI();save()}else if(act=='z+'){S.zoom=ZS[Math.min(4,ZS.indexOf(S.zoom)+1)]||120;applyUI();save()}else if(act=='zs'){S.zoom=+b.dataset.z;applyUI();save()}
+ else if(act=='hc'){S.hc=!S.hc;applyUI();save()}else if(act=='dk'){S.dark=!(S.dark===true||(S.dark===null&&matchMedia('(prefers-color-scheme:dark)').matches));applyUI();save()}
+ else if(act=='dec')setS(k,sel(k)-1,false);else if(act=='inc')setS(k,sel(k)+1,false);
+ else if(act=='ok'){S.ok[k]=true;upd(k)}else if(act=='ed'){S.ok[k]=false;upd(k)}
+ else if(act=='zoom'){const s=sel(k);zoomOpen(pic(k,s),IT[k].t+' · puntuación '+s+': '+IT[k].d[s-1])}
+ else if(act=='zph')zoomOpen(`<img src="${S.photos[+b.dataset.i]}" alt="Fotografía ampliada" style="width:100%;display:block">`,'Evidencia fotográfica');
+ else if(act=='rph'){S.photos.splice(+b.dataset.i,1);$('#phs').innerHTML=phs();save()}
+ else if(act=='zi'){Z=Math.min(3,Z+.3);$('#zbx').style.transform=`scale(${Z})`}else if(act=='zo'){Z=Math.max(.6,Z-.3);$('#zbx').style.transform=`scale(${Z})`}else if(act=='zc')$('#zm').className='';
+ else if(act=='start'){const g=S.g;const m=[['ev','el evaluador'],['em','la empresa'],['ar','el área'],['trab','el nombre del trabajador'],['cargo','el cargo']].find(x=>!(g[x[0]]||'').trim());if(m){toast('Complete '+m[1]);return}if(g.t==null){toast('Seleccione el tiempo diario frente a pantalla');return}
+  S.a=1;S.id=S.id||'ROSA-'+Date.now().toString(36).toUpperCase();S.view='e';S.step=1;render()}
+ else if(act=='back'){S.step=Math.max(0,S.step-1);render()}
+ else if(act=='next'){if(S.step<4&&!done(S.step)){toast('Confirme la puntuación de todos los ítems de '+REQ[S.step]);return}if(S.step==3)genPlan();S.step++;render();if(S.step==4)persist()}
+ else if(act=='regen'){genPlan();persist();render()}
+ else if(act=='pdf'){S.pdf=true;persist();const t=document.title;document.title=pdfName().replace('.pdf','');toast('Elija «Guardar como PDF» en el diálogo de impresión');setTimeout(()=>{window.print();document.title=t},800)}
+ else if(act=='xlsx')xlsx();
+ else if(act=='hist'){S.view='h';render()}else if(act=='ret'){S.view='e';render()}
+ else if(act=='new'){S={...S,step:0,view:'e',a:0,s:{},cr:{},ok:{},nph:false,photos:[],plan:[],id:'',pdf:false};render()}});
+if(S.view=='h'&&!S.a)S.view='e';
+initStore().then(()=>{if(S.view=='h')render()});render();
+</script></body></html>
